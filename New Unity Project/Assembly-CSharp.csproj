@@ -70,6 +70,8 @@
     <Compile Include="Assets\Low Poly Rocks Pack\Bonus Assets\Scripts\LowPolyRocks_FireLightControl.cs" />
     <Compile Include="Assets\Low Poly Rocks Pack\Bonus Assets\Scripts\LowPolyRocks_SunControl.cs" />
     <Compile Include="Assets\Modes.cs" />
+    <Compile Include="Assets\OSC\OSC.cs" />
+    <Compile Include="Assets\osc_sender.cs" />
     <Compile Include="Assets\posCheck.cs" />
     <Compile Include="Assets\Scripts\CarSwitcher.cs" />
     <Compile Include="Assets\Scripts\DriftCamera.cs" />

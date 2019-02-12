@@ -27,6 +27,9 @@ public class WheelDrive : MonoBehaviour
     bool timecheck;
     public bool LB, RB;
 
+    public OSC osc;
+
+
 
 
     [Tooltip("Maximum steering angle of the wheels")]
@@ -53,6 +56,15 @@ public class WheelDrive : MonoBehaviour
     // Find all the WheelColliders down in the hierarchy.
     void Start()
     {
+
+        OscMessage message0 = new OscMessage();
+        message0.address = "/toggle";
+        int toggle = 1;
+        message0.values.Add(toggle);
+        osc.Send(message0);
+
+
+
 
         timecheck = true; 
         m_Wheels = GetComponentsInChildren<WheelCollider>();
@@ -240,6 +252,21 @@ public class WheelDrive : MonoBehaviour
                 shapeTransform.rotation = q;
             }
         }
+
+
+
+        //OSC senders
+
+        OscMessage message = new OscMessage();
+        message.address = "/mode";
+        message.values.Add(mode);
+        osc.Send(message);
+
+        OscMessage message2 = new OscMessage();
+        message.address = "/vol";
+        message.values.Add(volume);
+        osc.Send(message2);
+
     }
   
 
