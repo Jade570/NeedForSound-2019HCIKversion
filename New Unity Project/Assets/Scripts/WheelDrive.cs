@@ -263,8 +263,8 @@ public class WheelDrive : MonoBehaviour
         osc.Send(message);
 
         OscMessage message2 = new OscMessage();
-        message.address = "/vol";
-        message.values.Add(volume);
+        message2.address = "/vol";
+        message2.values.Add(volume);
         osc.Send(message2);
 
     }

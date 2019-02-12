@@ -7,13 +7,13 @@ public class posCheck : MonoBehaviour
     private WheelDrive driver;
 
     public GameObject car;
-
+    public OSC osc;
 
 
     Vector3 lastPos;
     Vector3 currentPos;
     int _time = 0; //일정 시간마다 위치변화 체크
-    float slope; // 0=평지 1=상향 2=하향 3=멈춤
+    float slope; 
 
     void Start()
     {
@@ -59,13 +59,12 @@ public class posCheck : MonoBehaviour
  
 
 
-        /*
-        OscMessage message = new OscMessage();
+        
+        OscMessage message3 = new OscMessage();
+        message3.address = "/upDown";
+        message3.values.Add(slope);
+        osc.Send(message3);        
 
-        message.address = "/upDown";
-        message.values.Add(slope);
-        osc.Send(message);        
-*/
 
     }
     
