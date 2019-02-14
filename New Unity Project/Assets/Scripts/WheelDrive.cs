@@ -12,6 +12,8 @@ public enum DriveType
 
 [RequireComponent(typeof(AudioSource))]
 
+
+
 public class WheelDrive : MonoBehaviour
 {
  //   public float xpos, ypos, zrot;
@@ -29,7 +31,7 @@ public class WheelDrive : MonoBehaviour
 
     public OSC osc;
 
-
+    public GameObject obj_chordGenerator;
 
 
     [Tooltip("Maximum steering angle of the wheels")]
@@ -50,6 +52,43 @@ public class WheelDrive : MonoBehaviour
 
     [Tooltip("The vehicle's drive type: rear-wheels drive, front-wheels drive or all-wheels drive.")]
     public DriveType driveType;
+
+
+
+  
+
+    /*
+    IEnumerator Chord()
+    {
+        var chord = Instantiate(chords[CurrentGear, mode]);
+        chord.time = 0;
+        chord.Play();
+        yield return new WaitForSeconds(1);
+        Destroy(chord);
+         chord = Instantiate(chords[CurrentGear, mode]);
+        chord.time = 1;
+        chord.Play();
+        yield return new WaitForSeconds(1);
+        Destroy(chord);
+        chord = Instantiate(chords[CurrentGear, mode]);
+        chord.time = 2;
+        chord.Play();
+        yield return new WaitForSeconds(1);
+        Destroy(chord);
+        chord = Instantiate(chords[CurrentGear, mode]);
+        chord.time = 3;
+        chord.Play();
+        yield return new WaitForSeconds(1);
+        Destroy(chord);
+        
+
+
+
+
+    }
+    */
+
+
 
     private WheelCollider[] m_Wheels;
 
@@ -131,7 +170,25 @@ public class WheelDrive : MonoBehaviour
         //         Debug.Log(angle + " "  + torque + " " + handBrake );
 
 
-        //코드 소리 재생 부분
+
+        for (int i = 1; i <= 4; i++)
+        {
+            for (int j = 1; j <= 7; j++)
+            {
+                ChordsAdress[i, j] = GameObject.Find(i + "-" + j);
+                chords[i, j] = ChordsAdress[i, j].GetComponent<AudioSource>();
+            }
+        }
+
+        // StartCoroutine(Chord());
+
+
+
+
+
+        obj_chordGenerator.SendMessage("changeMode", new Vector2(mode, CurrentGear));
+
+      
         for (int i = 1; i <= 4; i++) {
             for (int j = 1; j <= 7; j++) {
                 ChordsAdress[i, j] = GameObject.Find(i + "-" + j);
@@ -141,39 +198,41 @@ public class WheelDrive : MonoBehaviour
 
 
 
-
+        /*
         for (int i = 1; i <= 4; i++)
         {
             for (int j = 1; j <= 7; j++)
             {
 
                 // Debug.Log(chords[i, j]);
-                //Debug.Log(angle + "&" + mode);
+                // Debug.Log(angle + "&" + mode);
 
 
                             if (i==CurrentGear && j == mode) {
-                    sample = chords[i, j];
+                                  sample = Instantiate (chords[i, j]);
 
                             if (sample.time >= 3.95 || sample.time <= 0)
                             {
-                               // Debug.Log(CurrentGear + " & " + mode);
-                                sample.Stop();
-                                sample = chords[i, j];
+                        // Debug.Log(CurrentGear + " & " + mode);
+                                //Destroy(sample);
+                                sample = Instantiate(chords[i, j]);
+                                
                                 timecheck = false;
 
                                 sample.time = 0.01f;
                                 sample.Play();
 
                                 timecheck = true;
+                        break;
                                 // Debug.Log(sample.time);
                             }
                             else if (sample.time >= 0.95 && sample.time <= 1)
                             {
-                               // Debug.Log(CurrentGear + " & " + mode);
-                        sample.Stop();
-                        sample = chords[i, j];
-                                
-                                timecheck = false;
+                        // Debug.Log(CurrentGear + " & " + mode);
+                        Destroy(sample);
+                        sample = Instantiate(chords[i, j]);
+
+                        timecheck = false;
 
                                 sample.time = 1.01f;
                                 sample.Play();
@@ -182,11 +241,11 @@ public class WheelDrive : MonoBehaviour
                             }
                             else if (sample.time >= 1.95 && sample.time <= 2)
                             {
-                               // Debug.Log(CurrentGear + " & " + mode);
-                        sample.Stop();
-                        sample = chords[i, j];
-                               
-                                timecheck = false;
+                        // Debug.Log(CurrentGear + " & " + mode);
+                        Destroy(sample);
+                        sample = Instantiate(chords[i, j]);
+
+                        timecheck = false;
 
                                 sample.time = 2.01f;
                                 sample.Play();
@@ -195,11 +254,11 @@ public class WheelDrive : MonoBehaviour
                             }
                             else if (sample.time >= 2.95 && sample.time <= 3)
                             {
-                               // Debug.Log(CurrentGear + " & " + mode);
-                        sample.Stop();
-                        sample = chords[i, j];
-                               
-                                timecheck = false;
+                        // Debug.Log(CurrentGear + " & " + mode);
+                        Destroy(sample);
+                        sample = Instantiate(chords[i, j]);
+
+                        timecheck = false;
 
                                 sample.time = 3.01f;
                                 sample.Play();
@@ -213,7 +272,8 @@ public class WheelDrive : MonoBehaviour
 
                     }
   
-    
+        */
+        
         //  Debug.Log(sample.time);
 
 
